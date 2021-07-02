@@ -1,6 +1,6 @@
-cd ..
+cd /Users/speedhacker/temp/printf
 make
-gcc -c test.c -I includes
-gcc -o test test.o libftprintf.a
-./test
-rm -rf test test.o
+gcc -c test/test.c -I libft/ -o test/test.o
+gcc -o test/test test/test.o libftprintf.a
+./test/test
+rm -rf test/test test/test.o
