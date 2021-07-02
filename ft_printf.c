@@ -6,7 +6,7 @@
 /*   By: sameye <sameye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 17:34:49 by sameye            #+#    #+#             */
-/*   Updated: 2021/07/02 19:17:02 by sameye           ###   ########.fr       */
+/*   Updated: 2021/07/02 19:40:36 by sameye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,7 @@ int	ft_printf(const char *input, ...)
 	char	*format_str;
 	va_start(args, input);
 
-	format_str = ft_strdup(input);
-	printcount = ft_threat_format(format_str, args);
-	free(format_str);
+	printcount = ft_threat_format((char *)input, args);
 	va_end(args);
 	return (printcount);
 }
