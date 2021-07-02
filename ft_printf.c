@@ -6,7 +6,7 @@
 /*   By: sameye <sameye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 17:34:49 by sameye            #+#    #+#             */
-/*   Updated: 2021/07/02 18:05:02 by sameye           ###   ########.fr       */
+/*   Updated: 2021/07/02 18:06:54 by sameye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int	ft_printf(const char *input, ...)
 {
     (void) input;
-    char str[50] = "uihiuhiu";
+    char str[40] = "uihiuhiu";
 
     printf("%s", str);
     return(3);
