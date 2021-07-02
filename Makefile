@@ -18,16 +18,17 @@ CC = gcc -Wall -Wextra -Werror
 all: $(NAME)
 
 $(NAME) : ${DIROBJS} ${LIBFT}
-		ar rcs ${NAME} ${DIROBJS} 
+		ar rcs ${NAME} ${DIROBJS} ${LIBFT}
 
 ${DIROBJS}: ${OBJS_DIR}%.o: %.c ${OBJS_DIR}
-		${CC} -c $< -o $@ -I ${LIBFTINCLUDES}
+		${CC} -c $< -o $@
 
 ${OBJS_DIR}:
 		mkdir $@
 
 ${LIBFT}:
 		$(MAKE) bonus -C ./libft
+		cp libft/libft.a $(NAME)
 
 clean:
 		rm -rf ${DIROBJS}
