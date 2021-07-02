@@ -6,18 +6,46 @@
 /*   By: sameye <sameye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 17:34:49 by sameye            #+#    #+#             */
-/*   Updated: 2021/07/02 18:06:54 by sameye           ###   ########.fr       */
+/*   Updated: 2021/07/02 18:49:56 by sameye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
 
-int	ft_printf(const char *input, ...)
+int ft_threat_format(char *format_str, va_list args)
 {
-    (void) input;
-    char str[40] = "uihiuhiu";
+	int	count;
+	int	printcount;
+	int i;
 
-    printf("%s", str);
-    return(3);
+	printcount = 0;
+	i = 0;
+	while (1)
+	{
+		if (format_str[i] == '\0')
+			break ;
+		if (format_str[i] == '%')
+		{
+			i += ft_threat_var(format_str[i], args, &count);
+			printcount += count;
+		}
+		else
+		{
+			ft_putchar(format_str[i]);
+			printcount++;
+		}
+	}
+	return (printcount);
+}
+
+int	ft_printf(const char *format_str, ...)
+{
+	va_list	args;
+	int		printcount;
+
+	va_start(args, format_str);
+	printcount = ft_threat_format(format_str, args);
+	va_end(args);
+	return (printcount);
 }

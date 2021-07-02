@@ -1,7 +1,8 @@
 #include "../ft_printf.h"
+#include <stdio.h>
 
 int main(void)
 {
-    ft_printf("%szed\niz\ted\\", "Hello");
-
+    printf("\ntest returned value : %d", 
+    ft_printf("%s%s", "Hello", "caca"));
 }
