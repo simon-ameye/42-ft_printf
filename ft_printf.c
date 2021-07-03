@@ -6,14 +6,14 @@
 /*   By: sameye <sameye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 17:34:49 by sameye            #+#    #+#             */
-/*   Updated: 2021/07/02 19:40:36 by sameye           ###   ########.fr       */
+/*   Updated: 2021/07/03 02:49:30 by sameye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
 
-int ft_threat_format(char *format_str, va_list args)
+int ft_threat_format(char *format_str, va_list *args)
 {
 	int	count;
 	int	printcount;
@@ -34,19 +34,19 @@ int ft_threat_format(char *format_str, va_list args)
 		{
 			write(1, &format_str[i], 1);
 			printcount++;
+			i++;
 		}
 	}
 	return (printcount);
 }
 
-int	ft_printf(const char *input, ...)
+int	ft_printf(const char *format_str, ...)
 {
 	va_list	args;
 	int		printcount;
-	char	*format_str;
-	va_start(args, input);
 
-	printcount = ft_threat_format((char *)input, args);
+	va_start(args, format_str);
+	printcount = ft_threat_format((char *)format_str, &args);
 	va_end(args);
 	return (printcount);
 }
