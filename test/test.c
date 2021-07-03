@@ -4,5 +4,5 @@
 int main(void)
 {
     printf("\ntest returned value : %d", 
-    ft_printf("%s%s%s", "Hello", "caca", "popo"));
+    ft_printf("le resultat de printf est %s%s%d", "Hello", "caca", -43));
 }
