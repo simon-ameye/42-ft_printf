@@ -6,7 +6,7 @@
 /*   By: sameye <sameye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 17:34:46 by sameye            #+#    #+#             */
-/*   Updated: 2021/07/06 22:07:03 by sameye           ###   ########.fr       */
+/*   Updated: 2021/07/06 22:14:13 by sameye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ int ft_threat_var(char *format_string, va_list *args, int *pt_count)
 	int varstrlen;
 	va_list argscopy;
 	
-	va_copy(argscopy, *args);
 	ft_init_flags(&flags);
 	i = ft_flag_parse(format_string, &flags, args);
+	va_copy(argscopy, *args);
 	varstrlen = ft_print_var(&flags, args, 1);
 	widthadd = flags.width - varstrlen;
 	if (widthadd > 0 && flags.zero == 0 && flags.minus == 0)
