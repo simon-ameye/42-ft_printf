@@ -6,7 +6,7 @@
 /*   By: sameye <sameye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 17:34:46 by sameye            #+#    #+#             */
-/*   Updated: 2021/07/06 20:26:03 by sameye           ###   ########.fr       */
+/*   Updated: 2021/07/06 20:33:19 by sameye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int ft_threat_var(char *format_string, va_list *args, int *pt_count)
 	
 	ft_init_flags(&flags);
 	i = ft_flag_parse(format_string, &flags, args);
-	*pt_count = ft_print_var(&flags, args);
-	printf("\nzero %i, minus %i, width %i, precision %i, type %c\n", flags.zero, flags.minus, flags.width, flags.precision, flags.type);
+	*pt_count = ft_print_var(&flags, args, 0);
+	//printf("\nzero %i, minus %i, width %i, precision %i, type %c\n", flags.zero, flags.minus, flags.width, flags.precision, flags.type);
 	return(i);
 }
