@@ -20,7 +20,7 @@ int main(void)
 //	ft_printf   ("!%88.*d!", 66, 123456));
 
 	printf("\nref returned value : %d\n",
-	printf      ("!%-14d!", 123456));
+	printf      ("!%-1d!", 123456));
 	printf("\nref returned value : %d\n",
-	printf      ("!%-14d!", 123456));
+	printf      ("!%-1d!", 123456));
 }
