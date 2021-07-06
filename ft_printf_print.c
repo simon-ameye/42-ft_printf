@@ -6,7 +6,7 @@
 /*   By: sameye <sameye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 17:34:42 by sameye            #+#    #+#             */
-/*   Updated: 2021/07/06 20:32:04 by sameye           ###   ########.fr       */
+/*   Updated: 2021/07/06 20:48:42 by sameye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,4 +148,17 @@ int ft_print_var(t_flags *flags,va_list *args, int mute)
 	if (flags->type == '%')
 		count = ft_putchar_i('%', mute);
 	return (count);
+}
+
+int ft_putcharrepeat(int c, int nb)
+{
+	int i;
+
+	i = 0;
+	while (i < nb)
+	{
+		write(1, &c, 1);
+		i++;
+	}
+	return (nb);
 }
