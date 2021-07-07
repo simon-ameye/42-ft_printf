@@ -6,7 +6,7 @@
 /*   By: sameye <sameye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 17:34:42 by sameye            #+#    #+#             */
-/*   Updated: 2021/07/06 22:34:41 by sameye           ###   ########.fr       */
+/*   Updated: 2021/07/07 18:14:18 by sameye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ int ft_putnbr_i(long nb, t_flags *flags)
 		size++;
 	}
 	size = ft_putnbr_i_util(nb, size, flags);
-	return (size + isneg);
+	return (size);
+	//return (size + isneg);
 }
 
 int ft_puthexa_i_util(long nb, int size, int upp, t_flags *flags)
