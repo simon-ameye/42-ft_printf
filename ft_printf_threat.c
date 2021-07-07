@@ -6,7 +6,7 @@
 /*   By: sameye <sameye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 17:34:46 by sameye            #+#    #+#             */
-/*   Updated: 2021/07/07 19:07:57 by sameye           ###   ########.fr       */
+/*   Updated: 2021/07/07 19:46:13 by sameye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,12 @@ int ft_threat_var(char *format_string, va_list *args, int *pt_count)
 {
 	t_flags flags;
 	int i;
-	int widthadd;
-	int varstrlen;
 	va_list argscopy;
+	int strlen;
+	int leftzeros;
+	int leftspaces;
+	int rightspaces;
+	int neg;
 	
 	ft_init_flags(&flags);
 	i = ft_flag_parse(format_string, &flags, args);
@@ -46,21 +49,21 @@ int ft_threat_var(char *format_string, va_list *args, int *pt_count)
 
 	va_copy(argscopy, *args);
 	flags.inputmute = 1;
-	varstrlen = ft_print_var(&flags, args);
-
-	//zeros = (max (precision - (-), width if zero) 
-	widthadd = flags.width - varstrlen;
-	if (widthadd > 0 && flags.zero == 0 && flags.minus == 0)
-		ft_putcharrepeat(' ', widthadd);
-	if (flags.resnegative == 1)
-		ft_putcharrepeat('-', 1);
-	if (widthadd > 0 && flags.zero == 1 && flags.minus == 0)
-		ft_putcharrepeat('0', widthadd);
-
+	strlen = ft_print_var(&flags, args);
 	flags.inputmute = 0;
-	*pt_count = ft_print_var(&flags, &argscopy) + widthadd * (widthadd > 0);
-	if (widthadd > 0 && flags.zero == 0 && flags.minus == 1)
-		ft_putcharrepeat(' ', widthadd);
+
+	neg = flags.resnegative;
+	leftzeros = ft_max(0, flags.precision - strlen);
+	leftzeros = ft_max(leftzeros, (flags.minus == 0) * (flags.zero == 1) * (flags.precision == 0) * (flags.width - strlen - neg));
+	leftspaces = ft_max(0, (flags.minus == 0)  * (flags.width - leftzeros - strlen - neg));
+	rightspaces = ft_max(0, (flags.minus == 1) * (flags.width - neg - strlen));
+
+	*pt_count += ft_putcharrepeat(' ', leftspaces);
+	*pt_count += ft_putcharrepeat('-', neg);
+	*pt_count += ft_putcharrepeat('0', leftzeros);
+	*pt_count += ft_print_var(&flags, &argscopy);
+	*pt_count += ft_putcharrepeat(' ', rightspaces);
+
 	//printf("\nzero %i, minus %i, width %i, precision %i, type %c\n", flags.zero, flags.minus, flags.width, flags.precision, flags.type);
 	return(i);
 }

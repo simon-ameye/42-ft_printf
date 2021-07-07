@@ -6,7 +6,7 @@
 /*   By: sameye <sameye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 17:34:49 by sameye            #+#    #+#             */
-/*   Updated: 2021/07/06 18:43:41 by sameye           ###   ########.fr       */
+/*   Updated: 2021/07/07 19:24:17 by sameye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int ft_threat_format(char *format_str, va_list *args)
 {
-	int	count;
+	//int	count;
 	int	printcount;
 	int i;
 
@@ -27,8 +27,8 @@ int ft_threat_format(char *format_str, va_list *args)
 			break ;
 		if (format_str[i] == '%')
 		{
-			i += ft_threat_var(&format_str[i], args, &count);
-			printcount += count;
+			i += ft_threat_var(&format_str[i], args, &printcount);
+			//printcount += count;
 		}
 		else
 		{
