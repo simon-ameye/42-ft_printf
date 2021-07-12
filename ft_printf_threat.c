@@ -6,7 +6,7 @@
 /*   By: sameye <sameye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 17:34:46 by sameye            #+#    #+#             */
-/*   Updated: 2021/07/07 19:46:13 by sameye           ###   ########.fr       */
+/*   Updated: 2021/07/11 01:22:44 by sameye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void ft_init_flags(t_flags *flags)
 	flags->type = 0;
 	flags->resnegative = 0;
 	flags->inputmute = 0;
+	flags->remaining = 0;
 }
 
 int ft_max(int nb1, int nb2)
@@ -29,6 +30,13 @@ int ft_max(int nb1, int nb2)
 	if (nb1 >= nb2)
 		return (nb1);
 	return (nb2);
+}
+
+int ft_is_num_type(int c)
+{
+	if (c == 'd' || c == 'i' || c == 'u' || c == 'x' || c == 'X')
+		return (1);
+	return (0);
 }
 
 int ft_threat_var(char *format_string, va_list *args, int *pt_count)
@@ -49,6 +57,7 @@ int ft_threat_var(char *format_string, va_list *args, int *pt_count)
 
 	va_copy(argscopy, *args);
 	flags.inputmute = 1;
+	flags.remaining = -1;
 	strlen = ft_print_var(&flags, args);
 	flags.inputmute = 0;
 
@@ -61,6 +70,7 @@ int ft_threat_var(char *format_string, va_list *args, int *pt_count)
 	*pt_count += ft_putcharrepeat(' ', leftspaces);
 	*pt_count += ft_putcharrepeat('-', neg);
 	*pt_count += ft_putcharrepeat('0', leftzeros);
+	flags.remaining = (flags.type == 's') * flags.precision + (flags.type != 's') * (-1);
 	*pt_count += ft_print_var(&flags, &argscopy);
 	*pt_count += ft_putcharrepeat(' ', rightspaces);
 

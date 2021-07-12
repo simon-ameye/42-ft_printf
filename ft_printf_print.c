@@ -6,7 +6,7 @@
 /*   By: sameye <sameye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 17:34:42 by sameye            #+#    #+#             */
-/*   Updated: 2021/07/07 18:14:18 by sameye           ###   ########.fr       */
+/*   Updated: 2021/07/11 01:20:45 by sameye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,11 @@
 
 int ft_putchar_i(int c, t_flags *flags)
 {
-	if (flags->inputmute == 0)
+	if (flags->inputmute == 0 && flags->remaining != 0)
+	{
 		write(1, &c, 1);
+		(flags->remaining)--;
+	}
 	return(1);
 }
 

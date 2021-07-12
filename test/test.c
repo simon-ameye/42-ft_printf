@@ -8,16 +8,16 @@ int main(void)
 
 	nb = -2147483648;
 	pt = &nb;
-
+/*
 
 	printf("\nres returned value : %d\n", 
 	ft_printf	("res : c:%c, s:%10s, p:%-10p, d:%-10d, i:%20i, u:%u, x:%-1x, X:%-*X, pourcen:%-03%", 'C', "caca", pt, nb, nb, nb, nb, 20, nb));
 	
 	printf("\nref returned value : %d\n",
 	printf		("res : c:%c, s:%10s, p:%-10p, d:%-10d, i:%20i, u:%u, x:%-1x, X:%-*X, pourcen:%-03%", 'C', "caca", pt, nb, nb, nb, nb, 20, nb));
-
-//	printf("\nres returned value : %d\n", 
-//	ft_printf   ("!%88.*d!", 66, 123456));
+*/
+	printf("\nres returned value : %d\n", 
+	ft_printf   ("!%.4s!", "1234567890"));
 /*
 	printf("\nres returned value : %d\n",
 	ft_printf		("!%-*X!", 20, nb));

@@ -6,7 +6,7 @@
 /*   By: sameye <sameye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 17:34:20 by sameye            #+#    #+#             */
-/*   Updated: 2021/07/06 22:31:20 by sameye           ###   ########.fr       */
+/*   Updated: 2021/07/11 01:04:54 by sameye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef	struct		s_flags
 	int				type;
 	int				inputmute;
 	int				resnegative;
+	int				remaining;
 }					t_flags;
 
 int     ft_printf(const char *str, ...);
