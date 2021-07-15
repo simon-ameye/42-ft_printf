@@ -6,7 +6,7 @@
 /*   By: sameye <sameye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 17:34:40 by sameye            #+#    #+#             */
-/*   Updated: 2021/07/07 19:01:20 by sameye           ###   ########.fr       */
+/*   Updated: 2021/07/15 19:25:14 by sameye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,7 @@ int ft_flag_parse(char *format_str, t_flags *flags, va_list *args)
 		}
 		i++;
 	}
+	flags->width = ft_max(0, flags->width);
+	flags->precision = ft_max(0, flags->precision);
 	return(i);
 }

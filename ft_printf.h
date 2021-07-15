@@ -6,7 +6,7 @@
 /*   By: sameye <sameye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 17:34:20 by sameye            #+#    #+#             */
-/*   Updated: 2021/07/11 01:04:54 by sameye           ###   ########.fr       */
+/*   Updated: 2021/07/15 19:25:55 by sameye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef	struct		s_flags
 	int				inputmute;
 	int				resnegative;
 	int				remaining;
+	int				count;
 }					t_flags;
 
 int     ft_printf(const char *str, ...);
@@ -38,6 +39,7 @@ int ft_print_var(t_flags *flags,va_list *args);
 int ft_putchar_i(int c, t_flags *flags);
 int ft_putstr_i(char *str, t_flags *flags);
 int ft_putcharrepeat(int c, int nb);
+int ft_max(int nb1, int nb2);
 
 
 
