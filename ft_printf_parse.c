@@ -6,7 +6,7 @@
 /*   By: sameye <sameye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 17:34:40 by sameye            #+#    #+#             */
-/*   Updated: 2021/07/15 19:25:14 by sameye           ###   ########.fr       */
+/*   Updated: 2021/07/16 13:28:34 by sameye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,32 +39,40 @@ int ft_flagnumparse(char *str, int *flag)
 int ft_flag_parse(char *format_str, t_flags *flags, va_list *args)
 {
 	int i;
-	int dotseen;
+	//int dotseen;
 
-	dotseen = 0;
+	//dotseen = 0;
 	i = 1;
+
 	while (1)
 	{
 		if (!ft_type_in_list(format_str[i]) && !ft_flag_in_list(format_str[i])
 				 && !ft_isdigit(format_str[i]))
 			break ;
-		if (format_str[i] == '0' && flags->minus == 0 && flags->width == 0 && flags->precision == 0)
+		if (format_str[i] == '0' && flags->minus == 0 && flags->width_given == 0 && flags->precision_given == 0)
 			flags->zero = 1;
 		if (format_str[i] == '-')
 			flags->minus = 1;
-		if (format_str[i] == '*' && dotseen == 0)
+		if (format_str[i] == '*' && flags->precision_given == 0)
 			flags->width = va_arg(*args, int);
-		if (ft_isdigit(format_str[i]) && dotseen == 0)
+		if (ft_isdigit(format_str[i]) && flags->precision_given == 0)
+		{
 			i += ft_flagnumparse(&(format_str[i]), &(flags->width));
+			flags->width_given = 1;
+		}
 		if (format_str[i] == '.')
 		{
 			i++;
-			dotseen = 1;
+			//dotseen = 1;
+			flags->precision_given = 1;
 		}
-		if (format_str[i] == '*' && dotseen == 1)
+		if (format_str[i] == '*' && flags->precision_given == 1)
 			flags->precision = va_arg(*args, int);
-		if (ft_isdigit(format_str[i]) && dotseen == 1)
+		if (ft_isdigit(format_str[i]) && flags->precision_given == 1)
+		{
+			flags->precision_given = 1;
 			i += ft_flagnumparse(&(format_str[i]), &(flags->precision));
+		}
 		if (ft_type_in_list(format_str[i]))
 		{
 			flags->type = format_str[i];

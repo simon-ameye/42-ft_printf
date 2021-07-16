@@ -6,7 +6,7 @@
 /*   By: sameye <sameye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 17:34:20 by sameye            #+#    #+#             */
-/*   Updated: 2021/07/15 19:25:55 by sameye           ###   ########.fr       */
+/*   Updated: 2021/07/16 13:03:12 by sameye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ typedef	struct		s_flags
 	int				resnegative;
 	int				remaining;
 	int				count;
+	int				precision_given;
+	int				width_given;
 }					t_flags;
 
 int     ft_printf(const char *str, ...);

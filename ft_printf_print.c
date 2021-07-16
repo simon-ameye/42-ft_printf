@@ -6,7 +6,7 @@
 /*   By: sameye <sameye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 17:34:42 by sameye            #+#    #+#             */
-/*   Updated: 2021/07/15 19:21:10 by sameye           ###   ########.fr       */
+/*   Updated: 2021/07/16 14:22:09 by sameye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ int ft_putstr_i(char *str, t_flags *flags)
 	char	c;
 
 	i = 0;
+	if (str == NULL)
+	{
+		i += ft_putstr_i("(null)", flags);
+		return (i);
+	}
 	while (str[i] != '\0')
 	{
 		c = str[i];
@@ -63,6 +68,13 @@ int ft_putnbr_i(long nb, t_flags *flags)
 	long copy;
 	int isneg;
 
+	if (nb == 0 && flags->precision_given == 1 && flags->precision == 0 && (flags->type == 'i' || flags->type == 'd' || flags->type == 'u'))
+		return (0);
+	if (nb == 0)
+	{
+		ft_putchar_i('0', flags);
+		return (1);
+	}
 	isneg = nb < 0;
 	if (isneg)
 	{
@@ -113,6 +125,13 @@ int ft_puthexa_i(long nb, int upp, t_flags *flags)
 
 	copy = nb;
 	size = 0;
+	if (nb == 0 && flags->precision_given == 1 && flags->precision == 0 && (flags->type == 'x' || flags->type == 'X' || flags->type == 'p'))
+		return (0);
+	if (nb == 0)
+	{
+		ft_putchar_i('0', flags);
+		return (1);
+	}
 	while (copy > 0)
 	{
 		copy = copy / 16;
@@ -126,8 +145,8 @@ int ft_putpointer_i(unsigned long pt, t_flags *flags)
 {
 	int count;
 
-	count = 2;
-	ft_putstr_i("0x", flags);
+	count = 0;
+	//ft_putstr_i("0x", flags);
 	count += ft_puthexa_i(pt, 0, flags);
 	return(count);
 }

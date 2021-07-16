@@ -17,13 +17,12 @@ int main(void)
 	printf		("res : c:%c, s:%10s, p:%-10p, d:%-10d, i:%20i, u:%u, x:%-1x, X:%-*X, pourcen:%-03%", 'C', "caca", pt, nb, nb, nb, nb, 20, nb));
 */
 	printf("\nres returned value : %d\n", 
-	ft_printf   ("!%%!"));
+	ft_printf   ("%c", 'c'));
 	printf("\nres returned value : %d\n", 
-	printf		("!%%!"));
+	printf		("%c", 'c'));
 }
 
 /*
-
 
 
 1) str
