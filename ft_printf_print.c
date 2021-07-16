@@ -6,14 +6,14 @@
 /*   By: sameye <sameye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 17:34:42 by sameye            #+#    #+#             */
-/*   Updated: 2021/07/16 17:00:22 by sameye           ###   ########.fr       */
+/*   Updated: 2021/07/16 17:34:07 by sameye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
 
-int ft_putchar_i(int c, t_flags *flags)
+void ft_putchar_i(int c, t_flags *flags)
 {
 	if (flags->inputmute == 0 && flags->remaining != 0)
 	{
@@ -23,29 +23,27 @@ int ft_putchar_i(int c, t_flags *flags)
 	}
 	if (flags->inputmute == 1)
 		(flags->count)++;
-	return(1);
 }
 
-int ft_putstr_i(char *str, t_flags *flags)
+void ft_putstr_i(char *str, t_flags *flags)
 {
 	int		i;
-	char	c;
 
 	i = 0;
 	if (str == NULL)
 	{
-		i += ft_putstr_i("(null)", flags);
-		return (i);
+		ft_putstr_i("(null)", flags);
+		return;
 	}
 	while (str[i] != '\0')
 	{
-		c = str[i];
-		i += ft_putchar_i(c, flags);
+		ft_putchar_i(str[i], flags);
+		i++;
 	}
-	return (i);
+	return;
 }
 
-int ft_putnbr_i_util(long nb, int size, t_flags *flags)
+void ft_putnbr_i_util(long nb, int size, t_flags *flags)
 {
 	char str[size + 1];
 	int i;
@@ -59,28 +57,26 @@ int ft_putnbr_i_util(long nb, int size, t_flags *flags)
 	}
 	str[i] = '\0';
 	ft_putstr_i(str, flags);
-	return (size);
 }
 
-int ft_putnbr_i(long nb, t_flags *flags)
+void ft_putnbr_i(long nb, t_flags *flags)
 {
 	int size;
 	long copy;
 	int isneg;
 
 	if (nb == 0 && flags->precision_given == 1 && flags->precision == 0 && (flags->type == 'i' || flags->type == 'd' || flags->type == 'u'))
-		return (0);
+		return;
 	if (nb == 0)
 	{
 		ft_putchar_i('0', flags);
-		return (1);
+		return;
 	}
 	isneg = nb < 0;
 	if (isneg)
 	{
 		nb = -nb;
 		flags->resnegative = 1;
-		//ft_putchar_i('-', flags);
 	}
 	size = 0;
 	copy = nb;
@@ -89,12 +85,10 @@ int ft_putnbr_i(long nb, t_flags *flags)
 		copy = copy / 10;
 		size++;
 	}
-	size = ft_putnbr_i_util(nb, size, flags);
-	return (size);
-	//return (size + isneg);
+	ft_putnbr_i_util(nb, size, flags);
 }
 
-int ft_puthexa_i_util(long nb, int size, int upp, t_flags *flags)
+void ft_puthexa_i_util(long nb, int size, int upp, t_flags *flags)
 {
 	char str[size + 1];
 	int i;
@@ -115,10 +109,9 @@ int ft_puthexa_i_util(long nb, int size, int upp, t_flags *flags)
 	}
 	str[i] = '\0';
 	ft_putstr_i(str, flags);
-	return (size);
 }
 
-int ft_puthexa_i(long nb, int upp, t_flags *flags)
+void ft_puthexa_i(long nb, int upp, t_flags *flags)
 {
 	int size;
 	long copy;
@@ -126,55 +119,40 @@ int ft_puthexa_i(long nb, int upp, t_flags *flags)
 	copy = nb;
 	size = 0;
 	if (nb == 0 && flags->precision_given == 1 && flags->precision == 0 && (flags->type == 'x' || flags->type == 'X' || flags->type == 'p'))
-		return (0);
+		return;
 	if (nb == 0)
 	{
 		ft_putchar_i('0', flags);
-		return (1);
+		return;
 	}
 	while (copy > 0)
 	{
 		copy = copy / 16;
 		size++;
 	}
-	size = ft_puthexa_i_util(nb, size, upp, flags);
-	return (size); 
+	ft_puthexa_i_util(nb, size, upp, flags);
 }
 
-int ft_putpointer_i(unsigned long pt, t_flags *flags)
+void ft_print_var(t_flags *flags,va_list *args)
 {
-	int count;
-
-	count = 0;
-	//ft_putstr_i("0x", flags);
-	count += ft_puthexa_i(pt, 0, flags);
-	return(count);
-}
-
-int ft_print_var(t_flags *flags,va_list *args)
-{
-	int count;
-
-	count = 0;
 	if (flags->type == 'c')
-		count = ft_putchar_i(va_arg(*args, int), flags);
+		ft_putchar_i(va_arg(*args, int), flags);
 	if (flags->type == 's')
-		count = ft_putstr_i(va_arg(*args, char *), flags);
+		ft_putstr_i(va_arg(*args, char *), flags);
 	if (flags->type == 'p')
-		count = ft_putpointer_i(va_arg(*args, unsigned long), flags);
+		ft_puthexa_i(va_arg(*args, unsigned long), 0, flags);
 	if (flags->type == 'd')
-		count = ft_putnbr_i(va_arg(*args, int), flags);
+		ft_putnbr_i(va_arg(*args, int), flags);
 	if (flags->type == 'i')
-		count = ft_putnbr_i(va_arg(*args, int), flags);
+		ft_putnbr_i(va_arg(*args, int), flags);
 	if (flags->type == 'u')
-		count = ft_putnbr_i(va_arg(*args, unsigned int), flags);
+		ft_putnbr_i(va_arg(*args, unsigned int), flags);
 	if (flags->type == 'x')
-		count = ft_puthexa_i(va_arg(*args, unsigned int), 0, flags);
+		ft_puthexa_i(va_arg(*args, unsigned int), 0, flags);
 	if (flags->type == 'X')
-		count = ft_puthexa_i(va_arg(*args, unsigned int), 1, flags);
+		ft_puthexa_i(va_arg(*args, unsigned int), 1, flags);
 	if (flags->type == '%')
-		count = ft_putchar_i('%', flags);
-	return (count * 0);
+		ft_putchar_i('%', flags);
 }
 
 int ft_putcharrepeat(int c, int nb)

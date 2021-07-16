@@ -6,7 +6,7 @@
 /*   By: sameye <sameye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 17:34:46 by sameye            #+#    #+#             */
-/*   Updated: 2021/07/16 17:06:50 by sameye           ###   ########.fr       */
+/*   Updated: 2021/07/16 17:18:57 by sameye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,10 @@ void ft_threat_int(t_flags *flags, int strlen, int *pt_count, va_list *argscopy)
 	rightspaces = ft_max(0, (flags->minus == 1) * (flags->width - neg - strlen - leftzeros - leftspaces - 2*(flags->type == 'p')));
 	*pt_count += ft_putcharrepeat(' ', leftspaces);
 	if (flags->type == 'p')
-		*pt_count += ft_putstr_i("0x", flags);
+	{
+		*pt_count += 2;
+		ft_putstr_i("0x", flags);
+	}
 	*pt_count += ft_putcharrepeat('-', neg);
 	*pt_count += ft_putcharrepeat('0', leftzeros);
 	flags->count = 0;
