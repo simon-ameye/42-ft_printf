@@ -6,7 +6,7 @@
 /*   By: sameye <sameye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 17:34:40 by sameye            #+#    #+#             */
-/*   Updated: 2021/07/16 13:28:34 by sameye           ###   ########.fr       */
+/*   Updated: 2021/07/16 16:49:47 by sameye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,7 @@ int ft_flagnumparse(char *str, int *flag)
 int ft_flag_parse(char *format_str, t_flags *flags, va_list *args)
 {
 	int i;
-	//int dotseen;
 
-	//dotseen = 0;
 	i = 1;
 
 	while (1)
@@ -54,7 +52,10 @@ int ft_flag_parse(char *format_str, t_flags *flags, va_list *args)
 		if (format_str[i] == '-')
 			flags->minus = 1;
 		if (format_str[i] == '*' && flags->precision_given == 0)
+		{
 			flags->width = va_arg(*args, int);
+			flags->width_given = 1;
+		}
 		if (ft_isdigit(format_str[i]) && flags->precision_given == 0)
 		{
 			i += ft_flagnumparse(&(format_str[i]), &(flags->width));
@@ -63,7 +64,6 @@ int ft_flag_parse(char *format_str, t_flags *flags, va_list *args)
 		if (format_str[i] == '.')
 		{
 			i++;
-			//dotseen = 1;
 			flags->precision_given = 1;
 		}
 		if (format_str[i] == '*' && flags->precision_given == 1)
@@ -81,7 +81,16 @@ int ft_flag_parse(char *format_str, t_flags *flags, va_list *args)
 		}
 		i++;
 	}
-	flags->width = ft_max(0, flags->width);
+	if (flags->width <0)
+	{
+		flags->width = -flags->width;
+		flags->minus = 1;
+	}
+	if (flags->precision < 0)
+	{
+		flags->precision_given = 0;
+	}
+	//flags->width = ft_max(0, flags->width);
 	flags->precision = ft_max(0, flags->precision);
 	return(i);
 }

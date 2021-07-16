@@ -6,7 +6,7 @@
 /*   By: sameye <sameye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 17:34:42 by sameye            #+#    #+#             */
-/*   Updated: 2021/07/16 14:22:09 by sameye           ###   ########.fr       */
+/*   Updated: 2021/07/16 17:00:22 by sameye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,7 @@ int ft_print_var(t_flags *flags,va_list *args)
 		count = ft_puthexa_i(va_arg(*args, unsigned int), 1, flags);
 	if (flags->type == '%')
 		count = ft_putchar_i('%', flags);
-	return (count);
+	return (count * 0);
 }
 
 int ft_putcharrepeat(int c, int nb)
