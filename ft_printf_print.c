@@ -6,7 +6,7 @@
 /*   By: sameye <sameye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 17:34:42 by sameye            #+#    #+#             */
-/*   Updated: 2021/07/16 17:34:07 by sameye           ###   ########.fr       */
+/*   Updated: 2021/07/19 12:07:18 by sameye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void ft_putnbr_i(long nb, t_flags *flags)
 	ft_putnbr_i_util(nb, size, flags);
 }
 
-void ft_puthexa_i_util(long nb, int size, int upp, t_flags *flags)
+void ft_puthexa_i_util(unsigned long long nb, int size, int upp, t_flags *flags)
 {
 	char str[size + 1];
 	int i;
@@ -100,10 +100,8 @@ void ft_puthexa_i_util(long nb, int size, int upp, t_flags *flags)
 		modulo = nb % 16;
 		if (modulo <= 9)
 			str[size - 1 - i] = modulo + '0';
-		else if (upp == 0)
-			str[size - 1 - i] = modulo + 'a' - 10;
-		else if (upp == 1)
-			str[size - 1 - i] = modulo + 'A' - 10;
+		else
+			str[size - 1 - i] = modulo + 'a' - 10 + ('A' - 'a') * (upp == 1);
 		i++;
 		nb = nb / 16;
 	}
@@ -111,10 +109,10 @@ void ft_puthexa_i_util(long nb, int size, int upp, t_flags *flags)
 	ft_putstr_i(str, flags);
 }
 
-void ft_puthexa_i(long nb, int upp, t_flags *flags)
+void ft_puthexa_i(unsigned long long nb, int upp, t_flags *flags)
 {
 	int size;
-	long copy;
+	unsigned long long copy;
 
 	copy = nb;
 	size = 0;
@@ -140,7 +138,7 @@ void ft_print_var(t_flags *flags,va_list *args)
 	if (flags->type == 's')
 		ft_putstr_i(va_arg(*args, char *), flags);
 	if (flags->type == 'p')
-		ft_puthexa_i(va_arg(*args, unsigned long), 0, flags);
+		ft_puthexa_i(va_arg(*args, unsigned long long), 0, flags);
 	if (flags->type == 'd')
 		ft_putnbr_i(va_arg(*args, int), flags);
 	if (flags->type == 'i')
