@@ -6,14 +6,13 @@
 /*   By: sameye <sameye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 17:34:42 by sameye            #+#    #+#             */
-/*   Updated: 2021/07/19 12:07:18 by sameye           ###   ########.fr       */
+/*   Updated: 2021/07/20 00:28:49 by sameye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
-void ft_putchar_i(int c, t_flags *flags)
+void	ft_putchar_i(int c, t_flags *flags)
 {
 	if (flags->inputmute == 0 && flags->remaining != 0)
 	{
@@ -25,7 +24,7 @@ void ft_putchar_i(int c, t_flags *flags)
 		(flags->count)++;
 }
 
-void ft_putstr_i(char *str, t_flags *flags)
+void	ft_putstr_i(char *str, t_flags *flags)
 {
 	int		i;
 
@@ -33,20 +32,20 @@ void ft_putstr_i(char *str, t_flags *flags)
 	if (str == NULL)
 	{
 		ft_putstr_i("(null)", flags);
-		return;
+		return ;
 	}
 	while (str[i] != '\0')
 	{
 		ft_putchar_i(str[i], flags);
 		i++;
 	}
-	return;
+	return ;
 }
 
-void ft_putnbr_i_util(long nb, int size, t_flags *flags)
+void	ft_putnbr_i_util(long nb, int size, t_flags *flags)
 {
-	char str[size + 1];
-	int i;
+	char	str[10 + 1];
+	int		i;
 
 	i = 0;
 	while (i < size)
@@ -59,19 +58,17 @@ void ft_putnbr_i_util(long nb, int size, t_flags *flags)
 	ft_putstr_i(str, flags);
 }
 
-void ft_putnbr_i(long nb, t_flags *flags)
+void	ft_putnbr_i(long nb, t_flags *flags)
 {
-	int size;
-	long copy;
-	int isneg;
+	int		size;
+	long	copy;
+	int		isneg;
 
-	if (nb == 0 && flags->precision_given == 1 && flags->precision == 0 && (flags->type == 'i' || flags->type == 'd' || flags->type == 'u'))
-		return;
+	if (nb == 0 && flags->precision_given == 1 && flags->precision == 0
+		&& (flags->type == 'i' || flags->type == 'd' || flags->type == 'u'))
+		return ;
 	if (nb == 0)
-	{
 		ft_putchar_i('0', flags);
-		return;
-	}
 	isneg = nb < 0;
 	if (isneg)
 	{
@@ -88,11 +85,12 @@ void ft_putnbr_i(long nb, t_flags *flags)
 	ft_putnbr_i_util(nb, size, flags);
 }
 
-void ft_puthexa_i_util(unsigned long long nb, int size, int upp, t_flags *flags)
+void	ft_puthexa_i_util(unsigned long long nb, int size, int upp,
+			t_flags *flags)
 {
-	char str[size + 1];
-	int i;
-	long modulo;
+	char	str[16 + 1];
+	int		i;
+	long	modulo;
 
 	i = 0;
 	while (i < size)
@@ -109,19 +107,20 @@ void ft_puthexa_i_util(unsigned long long nb, int size, int upp, t_flags *flags)
 	ft_putstr_i(str, flags);
 }
 
-void ft_puthexa_i(unsigned long long nb, int upp, t_flags *flags)
+void	ft_puthexa_i(unsigned long long nb, int upp, t_flags *flags)
 {
-	int size;
-	unsigned long long copy;
+	int					size;
+	unsigned long long	copy;
 
 	copy = nb;
 	size = 0;
-	if (nb == 0 && flags->precision_given == 1 && flags->precision == 0 && (flags->type == 'x' || flags->type == 'X' || flags->type == 'p'))
-		return;
+	if (nb == 0 && flags->precision_given == 1 && flags->precision == 0
+		&& (flags->type == 'x' || flags->type == 'X' || flags->type == 'p'))
+		return ;
 	if (nb == 0)
 	{
 		ft_putchar_i('0', flags);
-		return;
+		return ;
 	}
 	while (copy > 0)
 	{
@@ -131,7 +130,7 @@ void ft_puthexa_i(unsigned long long nb, int upp, t_flags *flags)
 	ft_puthexa_i_util(nb, size, upp, flags);
 }
 
-void ft_print_var(t_flags *flags,va_list *args)
+void	ft_print_var(t_flags *flags, va_list *args)
 {
 	if (flags->type == 'c')
 		ft_putchar_i(va_arg(*args, int), flags);
@@ -153,9 +152,9 @@ void ft_print_var(t_flags *flags,va_list *args)
 		ft_putchar_i('%', flags);
 }
 
-int ft_putcharrepeat(int c, int nb)
+int	ft_putcharrepeat(int c, int nb)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < nb)
