@@ -16,10 +16,11 @@ int main(void)
 	printf("\nref returned value : %d\n",
 	printf		("res : c:%c, s:%10s, p:%-10p, d:%-10d, i:%20i, u:%u, x:%-1x, X:%-*X, pourcen:%-03%", 'C', "caca", pt, nb, nb, nb, nb, 20, nb));
 */
+
 	printf("\nres returned value : %d\n", 
-	ft_printf   ("%p, %p", (void *)-2147483648, (void *)1));
+	ft_printf   ("mon age est : %-20i ans, et mon nom est : %s. j'aimme la %c, -15 en hexa c'est : %020X", nb, "simon", 'C', -15));
 	printf("\nres returned value : %d\n", 
-	printf		("%p, %p", (void *)-2147483648, (void *)1));
+	printf		("mon age est : %-20i ans, et mon nom est : %s. j'aimme la %c, -15 en hexa c'est : %020X", nb, "simon", 'C', -15));
 }
 
 /*

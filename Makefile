@@ -31,6 +31,8 @@ ${OBJS_DIR}:
 ${LIBFT}:
 		$(MAKE) bonus -C ./libft
 		cp libft/libft.a $(NAME)
+	
+bonus :	all
 
 clean:
 		rm -rf ${DIROBJS}
