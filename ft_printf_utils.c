@@ -6,7 +6,7 @@
 /*   By: sameye <sameye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 11:22:14 by sameye            #+#    #+#             */
-/*   Updated: 2021/07/20 11:22:56 by sameye           ###   ########.fr       */
+/*   Updated: 2021/07/20 12:48:32 by sameye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,13 @@ int	ft_min(int nb1, int nb2)
 int	ft_is_num_type(int c)
 {
 	if (c == 'p' || c == 'd' || c == 'i' || c == 'u' || c == 'x' || c == 'X')
+		return (1);
+	return (0);
+}
+
+int	ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
 		return (1);
 	return (0);
 }

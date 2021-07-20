@@ -6,7 +6,7 @@
 /*   By: sameye <sameye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 17:34:20 by sameye            #+#    #+#             */
-/*   Updated: 2021/07/20 12:04:42 by sameye           ###   ########.fr       */
+/*   Updated: 2021/07/20 12:48:24 by sameye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,6 @@ int		ft_type_in_list(int i);
 int		ft_flag_in_list(int i);
 int		ft_flagnumparse(char *str, int *flag);
 void	ft_flag_parse(char *format_str, t_flags *flags, va_list *args, int *i);
+int		ft_isdigit(int c);
 
 #endif

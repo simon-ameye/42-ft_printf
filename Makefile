@@ -2,9 +2,6 @@ OBJS_DIR = obj/
 INC = ft_printf.h
 NAME = libftprintf.a
 
-LIBFT = libft/libft.a
-LIBFTINCLUDES = libft/includes/
-
 SRCS += ft_printf.c
 SRCS += ft_printf_parse.c
 SRCS += ft_printf_print.c
@@ -20,7 +17,7 @@ CC = gcc -Wall -Wextra -Werror
 all: $(NAME)
 
 $(NAME) : ${DIROBJS} ${LIBFT}
-		ar rcs ${NAME} ${DIROBJS} ${LIBFT}
+		ar rcs ${NAME} ${DIROBJS}
 
 ${DIROBJS}: ${OBJS_DIR}%.o: %.c ${OBJS_DIR}
 		${CC} -c $< -o $@
@@ -28,10 +25,6 @@ ${DIROBJS}: ${OBJS_DIR}%.o: %.c ${OBJS_DIR}
 ${OBJS_DIR}:
 		mkdir $@
 
-${LIBFT}:
-		$(MAKE) bonus -C ./libft
-		cp libft/libft.a $(NAME)
-	
 bonus :	all
 
 clean:
