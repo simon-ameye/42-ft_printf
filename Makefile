@@ -29,11 +29,9 @@ bonus :	all
 
 clean:
 		rm -rf ${DIROBJS}
-		$(MAKE) clean -C ./libft
 
 fclean: clean
 		rm -rf ${NAME}
-		$(MAKE) fclean -C ./libft
 
 re: fclean all
 

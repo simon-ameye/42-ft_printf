@@ -6,14 +6,13 @@
 /*   By: sameye <sameye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 17:34:20 by sameye            #+#    #+#             */
-/*   Updated: 2021/07/20 12:48:24 by sameye           ###   ########.fr       */
+/*   Updated: 2021/07/23 17:43:47 by sameye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include "libft/libft.h"
 # include <stdarg.h>
 # include <unistd.h>
 
