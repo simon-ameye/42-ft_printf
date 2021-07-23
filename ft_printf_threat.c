@@ -6,7 +6,7 @@
 /*   By: sameye <sameye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 17:34:46 by sameye            #+#    #+#             */
-/*   Updated: 2021/07/20 11:25:04 by sameye           ###   ########.fr       */
+/*   Updated: 2021/07/23 19:00:12 by sameye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	ft_threat_int(t_flags *flags, int strlen, int *pt_count,
 	leftzeros = ft_max(0, flags->precision - strlen);
 	leftzeros = ft_max(leftzeros, (flags->minus == 0) * (flags->zero == 1)
 			* (flags->precision == 0) * (flags->width - strlen - neg));
+	leftzeros = leftzeros * (flags->precision_given == 0 || strlen != 0);
 	leftspaces = ft_max(0, (flags->minus == 0) * (flags->width
 				- leftzeros - strlen - neg - 2 * (flags->type == 'p')));
 	rightspaces = ft_max(0, (flags->minus == 1) * (flags->width - neg
