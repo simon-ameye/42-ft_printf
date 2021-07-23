@@ -6,7 +6,7 @@
 /*   By: sameye <sameye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 17:34:46 by sameye            #+#    #+#             */
-/*   Updated: 2021/07/23 19:00:12 by sameye           ###   ########.fr       */
+/*   Updated: 2021/07/23 19:23:53 by sameye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ void	ft_threat_int(t_flags *flags, int strlen, int *pt_count,
 
 	neg = flags->resnegative;
 	leftzeros = ft_max(0, flags->precision - strlen);
-	leftzeros = ft_max(leftzeros, (flags->minus == 0) * (flags->zero == 1)
-			* (flags->precision == 0) * (flags->width - strlen - neg));
+	if (flags->minus == 0 && flags->zero == 1 && flags->precision == 0)
+		leftzeros = ft_max(leftzeros, flags->width - strlen - neg);
 	leftzeros = leftzeros * (flags->precision_given == 0 || strlen != 0);
 	leftspaces = ft_max(0, (flags->minus == 0) * (flags->width
 				- leftzeros - strlen - neg - 2 * (flags->type == 'p')));
@@ -76,10 +76,8 @@ void	ft_threat_int(t_flags *flags, int strlen, int *pt_count,
 				- strlen - leftzeros - leftspaces - 2 * (flags->type == 'p')));
 	*pt_count += ft_putcharrepeat(' ', leftspaces);
 	if (flags->type == 'p')
-	{
-		*pt_count += 2;
 		ft_putstr_i("0x", flags);
-	}
+	*pt_count += 2 * (flags->type == 'p');
 	*pt_count += ft_putcharrepeat('-', neg);
 	*pt_count += ft_putcharrepeat('0', leftzeros);
 	flags->count = 0;
